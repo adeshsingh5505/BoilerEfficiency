@@ -1,0 +1,24 @@
+model = Sequential([
+    Dense(128, input_shape=(X_train.shape[1],), kernel_regularizer=l2(0.01)),
+    LeakyReLU(alpha=0.01),
+    BatchNormalization(),
+    Dropout(0.3),
+    Dense(64, kernel_regularizer=l2(0.01)),
+    LeakyReLU(alpha=0.01),
+    BatchNormalization(),
+    Dropout(0.3),
+    Dense(32, kernel_regularizer=l2(0.01)),
+    LeakyReLU(alpha=0.01),
+    BatchNormalization(),
+    Dropout(0.2),
+    Dense(16, kernel_regularizer=l2(0.01)),
+    LeakyReLU(alpha=0.01),
+    BatchNormalization(),
+    Dense(1)
+])
+O/P:   📊 Evaluation Metrics:
+🔹 Mean Squared Error (MSE): 2.3258
+🔹 Root Mean Squared Error (RMSE): 1.5250
+🔹 Mean Absolute Error (MAE): 1.1459
+🔹 R² Score: 0.8759
+🔹 Tolerance Accuracy (±5%): 1.0000
