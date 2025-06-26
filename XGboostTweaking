@@ -9,4 +9,13 @@
 R2 Score: 0.9358286574628382
 MAE:  0.814618361579047
 
-2.
+2.'max_depth': [16],
+    'learning_rate': [0.05],
+    'n_estimators': [100],
+    'subsample': [0.8],
+    'colsample_bytree': [0.8],
+    'gamma': [0],
+    'reg_alpha': [0],
+    'reg_lambda': [1]
+R2 Score: 0.9932316499066184
+MAE:  0.20732377822310807
