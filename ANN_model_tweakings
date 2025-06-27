@@ -1,3 +1,4 @@
+EPOCH:50
 model = Sequential([
     Dense(128, input_shape=(X_train.shape[1],), kernel_regularizer=l2(0.01)),
     LeakyReLU(alpha=0.01),
@@ -22,7 +23,7 @@ O/P:   📊 Evaluation Metrics:
 🔹 Mean Absolute Error (MAE): 1.1459
 🔹 R² Score: 0.8759
 🔹 Tolerance Accuracy (±5%): 1.0000
-
+-------------------------------------------------------------------------------------------------------------------------
 model = Sequential([
     Dense(1, input_shape=(X_train.shape[1],), kernel_regularizer=l2(0.01)),
     LeakyReLU(alpha=0.01)
@@ -34,7 +35,7 @@ O/P:
 🔹 Mean Absolute Error (MAE): 431.6342
 🔹 R² Score: -11005.5049
 🔹 Tolerance Accuracy (±5%): 0.0091
-
+--------------------------------------------------------------------------------------------------------------------------
 model = Sequential([
     Dense(256, input_shape=(X_train.shape[1],), kernel_regularizer=l2(0.01)),
     LeakyReLU(alpha=0.01),
@@ -62,4 +63,47 @@ O/P: 📊 Evaluation Metrics:
 🔹 Root Mean Squared Error (RMSE): 1.3867
 🔹 Mean Absolute Error (MAE): 1.0522
 🔹 R² Score: 0.8974
+🔹 Tolerance Accuracy (±5%): 1.0000
+------------------------------------------------------------------------------------------------------------------
+
+model = Sequential([
+    Dense(256, input_shape=(X_train.shape[1],), kernel_regularizer=l2(0.01)),
+    LeakyReLU(alpha=0.01),
+    BatchNormalization(),
+    Dropout(0.3),
+
+    Dense(128, kernel_regularizer=l2(0.01)),
+    LeakyReLU(alpha=0.01),
+    BatchNormalization(),
+    Dropout(0.3),
+
+    Dense(64, kernel_regularizer=l2(0.01)),
+    LeakyReLU(alpha=0.01),
+    BatchNormalization(),
+    Dropout(0.2),
+
+    Dense(32, kernel_regularizer=l2(0.01)),
+    LeakyReLU(alpha=0.01),
+    BatchNormalization(),
+
+    Dense(16, kernel_regularizer=l2(0.01)),
+    LeakyReLU(alpha=0.01),
+    BatchNormalization(),
+
+    Dense(1)  # Output layer
+])
+O/P: 📊 Evaluation Metrics:
+🔹 Mean Squared Error (MSE): 1.9492
+🔹 Root Mean Squared Error (RMSE): 1.3962
+🔹 Mean Absolute Error (MAE): 1.0532
+🔹 R² Score: 0.8960
+🔹 Tolerance Accuracy (±5%): 1.0000
+------------------------------------------------------------------------------------------------------------------------------
+DENSE(256,128,64,32,1)
+EPOCHS:100
+O/P: 📊 Evaluation Metrics:
+🔹 Mean Squared Error (MSE): 0.9872
+🔹 Root Mean Squared Error (RMSE): 0.9936
+🔹 Mean Absolute Error (MAE): 0.7372
+🔹 R² Score: 0.9473
 🔹 Tolerance Accuracy (±5%): 1.0000
