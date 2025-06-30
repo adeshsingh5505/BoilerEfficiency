@@ -1,4 +1,4 @@
-1.  'max_depth': [32],
+1.  'max_depth': [8],
     'learning_rate': [0.05],
     'n_estimators': [100],
     'subsample': [0.8],
