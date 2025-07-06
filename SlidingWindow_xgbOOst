@@ -1,1 +1,71 @@
+Model Specifications: Window size=12
 
+1.Dropped column ='Pot pressure (left)'
+MAE of XGboost:  0.04514413297776633
+R2 of XGboost:  0.9996081445826945
+Maximum Error Percentage: 0.20%
+Minimum Error Percentage: 0.00%
+Mean Error Percentage: 0.01%
+
+2.Dropped column = 'Flue gas temperature at the upper economizer outlet (left)'
+MAE of XGboost:  0.04421855825394863
+R2 of XGboost:  0.9996418338657017
+Maximum Error Percentage: 0.21%
+Minimum Error Percentage: 0.00%
+Mean Error Percentage: 0.01%
+
+3.Dropped Column='Flue gas temperature at the upper economizer outlet (right)'
+MAE of XGboost:  0.04481248945891295
+R2 of XGboost:  0.9996395873163522
+Maximum Error Percentage: 0.24%
+Minimum Error Percentage: 0.00%
+Mean Error Percentage: 0.01%
+
+4.Dropped Column='Temperature in the upper part of the furnace chamber (right)'
+MAE of XGboost:  0.044846310382061584
+R2 of XGboost:  0.9996304384515117
+Maximum Error Percentage: 0.26%
+Minimum Error Percentage: 0.00%
+Mean Error Percentage: 0.01%
+
+5.Dropped Column='Primary air preheater outlet air temperature'
+MAE of XGboost:  0.04433025817129319
+R2 of XGboost:  0.9996508978114027
+Maximum Error Percentage: 0.24%
+Minimum Error Percentage: 0.00%
+Mean Error Percentage: 0.01%
+
+6.Dropped Column='Secondary air preheater outlet air temperature'
+MAE of XGboost:  0.04469639337122216
+R2 of XGboost:  0.9996398245835326
+Maximum Error Percentage: 0.23%
+Minimum Error Percentage: 0.00%
+Mean Error Percentage: 0.01%
+
+7.Dropped Column='Primary desuperheater outlet steam temperature regulating valve'
+MAE of XGboost:  0.0450580443700086
+R2 of XGboost:  0.9996184707696156
+Maximum Error Percentage: 0.20%
+Minimum Error Percentage: 0.00%
+Mean Error Percentage: 0.01%
+
+8.Dropped Column='Primary fan outlet flow rate'
+MAE of XGboost:  0.04534176875601409
+R2 of XGboost:  0.9996269496081419
+Maximum Error Percentage: 0.25%
+Minimum Error Percentage: 0.00%
+Mean Error Percentage: 0.01%
+
+9.Dropped Column='Secondary fan outlet flow'
+MAE of XGboost:  0.04382293245474779
+R2 of XGboost:  0.9996734549476853
+Maximum Error Percentage: 0.23%
+Minimum Error Percentage: 0.00%
+Mean Error Percentage: 0.01%
+
+10.Dropped Column='Return air chamber air flow (left)'
+MAE of XGboost:  0.04449834075373158
+R2 of XGboost:  0.9996466990137733
+Maximum Error Percentage: 0.23%
+Minimum Error Percentage: 0.00%
+Mean Error Percentage: 0.01%
