@@ -150,3 +150,14 @@ DENSE(512,256,128,64,32,16,1) EPOCH(300,300)
 🔹 Tolerance Accuracy (±5%): 1.0000
 🔹 Minimum Absolute Error: 0.0000
 🔹 Maximum Absolute Error: 11.5841
+------------------------------------------------------------------------------------------------------------------------------------
+DENSE(512,256,128,64,32,16,1) EPOCH(300,300)
+
+📊 Evaluation Metrics:
+🔹 Mean Squared Error (MSE): 0.4837
+🔹 Root Mean Squared Error (RMSE): 0.6955
+🔹 Mean Absolute Error (MAE): 0.4629
+🔹 R² Score: 0.9745
+🔹 Tolerance Accuracy (±5%): 1.0000
+🔹 Minimum Percentage Error: 0.0000%
+🔹 Maximum Percentage Error: 3.2986%
