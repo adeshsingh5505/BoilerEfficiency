@@ -1,0 +1,100 @@
+import os
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+from scipy import stats
+from math import sqrt
+
+def runs_test(series):
+    s = np.asarray(series)
+    median = np.median(s)
+    mask = s != median
+    s2 = s[mask]
+    if len(s2) < 2:
+        return np.nan, np.nan
+    signs = np.where(s2 > median, 1, 0)
+    n1 = np.sum(signs == 1)
+    n2 = np.sum(signs == 0)
+    if n1 == 0 or n2 == 0:
+        return np.nan, np.nan
+    runs = 1 + np.sum(signs[1:] != signs[:-1])
+    n = n1 + n2
+    expected_runs = 1 + (2.0 * n1 * n2) / n
+    var_runs = (2.0 * n1 * n2 * (2*n1*n2 - n)) / (n*n*(n-1))
+    if var_runs <= 0:
+        return np.nan, np.nan
+    z = (runs - expected_runs) / np.sqrt(var_runs)
+    p = 2 * (1 - stats.norm.cdf(abs(z)))
+    return z, p
+
+def autocorr(series, lag):
+    s = np.asarray(series)
+    if lag >= len(s): return np.nan
+    mean = np.mean(s)
+    return np.sum((s[:-lag] - mean) * (s[lag:] - mean)) / np.sum((s - mean)**2)
+
+def ljung_box(series, lags=20):
+    s = np.asarray(series)
+    n = len(s)
+    acfs = [autocorr(s, k) for k in range(1, lags+1)]
+    acfs = [0 if np.isnan(a) else a for a in acfs]
+    Q = n*(n+2) * sum((acfs[k-1]**2)/(n-k) for k in range(1, lags+1))
+    p = 1 - stats.chi2.cdf(Q, lags)
+    return Q, p
+
+def plot_and_test_randomness(csv_path, save_folder="results", max_lag=20):
+    # Read CSV
+    df = pd.read_csv(csv_path)
+    numeric_cols = df.select_dtypes(include=[np.number]).columns.tolist()
+
+    # Create result folder
+    os.makedirs(save_folder, exist_ok=True)
+
+    results = []
+
+    for col in numeric_cols:
+        series = df[col].dropna().values
+        n = len(series)
+        if n == 0:
+            continue
+
+        mean = np.mean(series)
+        std = np.std(series)
+
+        # Tests
+        runs_z, runs_p = runs_test(series)
+        lb_Q, lb_p = ljung_box(series, lags=max_lag)
+
+        # Save results
+        results.append([col, n, mean, std, runs_z, runs_p, lb_Q, lb_p])
+
+        # ---- Plot ----
+        fig, ax = plt.subplots(3, 1, figsize=(8, 12))
+
+        # Time series
+        ax[0].plot(series)
+        ax[0].set_title(f"Time Series: {col}")
+
+        # Histogram
+        ax[1].hist(series, bins="auto", density=True)
+        ax[1].set_title("Histogram")
+
+        # Autocorrelation bars
+        acf_vals = [autocorr(series, k) for k in range(1, max_lag+1)]
+        ax[2].bar(range(1, max_lag+1), acf_vals)
+        ax[2].axhline(0, color="black")
+        ax[2].set_title(f"Autocorrelation (Ljung-Box p={lb_p:.3f})")
+
+        # Save plot
+        fig.savefig(f"{save_folder}/{col}.png", dpi=120, bbox_inches='tight')
+        plt.close(fig)
+
+    # Convert results to DataFrame and save
+    result_df = pd.DataFrame(results, columns=[
+        "column", "n", "mean", "std", "runs_z", "runs_p", "ljungQ", "ljung_p"
+    ])
+    result_df.to_csv(f"{save_folder}/summary.csv", index=False)
+
+    print("✔ All plots saved in folder:", save_folder)
+    print("✔ Summary saved as:", save_folder + "/summary.csv")
+    return result_df
